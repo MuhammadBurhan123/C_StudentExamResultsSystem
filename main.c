@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-// Define a structure named Student
 struct Student {
     char name[50];
     int rollNumber;
@@ -9,10 +8,8 @@ struct Student {
     char grade;
 };
 
-// Declare an array of 25 Student structures
 struct Student students[25];
 
-// Function to load student information from "results.txt"
 void loadResults() {
     FILE *file = fopen("results.txt", "r");
     if (file == NULL) {
@@ -24,7 +21,6 @@ void loadResults() {
         fscanf(file, "%s %d %d %f %f %f", students[i].name, &students[i].rollNumber, &students[i].age,
                &students[i].marks[0], &students[i].marks[1], &students[i].marks[2]);
 
-        // Calculate grade based on marks
         float average = (students[i].marks[0] + students[i].marks[1] + students[i].marks[2]) / 3.0;
         students[i].grade = (average >= 70) ? 'A' : (average >= 60) ? 'B' : 'C';
     }
@@ -32,7 +28,6 @@ void loadResults() {
     fclose(file);
 }
 
-// Function to save student information to "results.txt"
 void saveResults() {
     FILE *file = fopen("results.txt", "w");
     if (file == NULL) {
@@ -48,7 +43,6 @@ void saveResults() {
     fclose(file);
 }
 
-// Function to input details for each student and save to "results.txt"
 void inputStudentData() {
     for (int i = 0; i < 25; i++) {
         printf("Enter details for student %d:\n", i + 1);
@@ -61,15 +55,13 @@ void inputStudentData() {
         printf("Marks for three subjects: ");
         scanf("%f %f %f", &students[i].marks[0], &students[i].marks[1], &students[i].marks[2]);
 
-        // Calculate grade based on marks
         float average = (students[i].marks[0] + students[i].marks[1] + students[i].marks[2]) / 3.0;
         students[i].grade = (average >= 70) ? 'A' : (average >= 60) ? 'B' : 'C';
     }
 
-    saveResults(); // Save to file after inputting data
+    saveResults();
 }
 
-// Function to display results
 void displayResults() {
     for (int i = 0; i < 25; i++) {
         printf("Student %d:\n", i + 1);
@@ -83,14 +75,11 @@ void displayResults() {
 }
 
 int main() {
-    // Example usage
     loadResults();
     displayResults();
 
-    // Input new data
     inputStudentData();
 
-    // Display updated results
     displayResults();
 
     return 0;
